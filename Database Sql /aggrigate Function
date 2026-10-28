@@ -1,0 +1,159 @@
+import psycopg2
+conn= psycopg2.connect(
+    host="localhost",
+    port=5432,
+    dbname="focus",
+    user="postgres",
+    password="1445"
+    )
+
+print("database connected succesfully")
+cursor=conn.cursor()
+
+Query="""select count(*) from employee"""
+cursor.execute(Query)
+data=cursor.fetchall()
+print(data)
+
+query="""select sum(salary) from employee"""
+cursor.execute(query)
+data=cursor.fetchall()
+print(data)
+
+query="""select avg(salary) from employee"""
+cursor.execute(query)
+data=cursor.fetchall()
+print(data)
+
+query="""select max(salary) from employee"""
+cursor.execute(query)
+data=cursor.fetchall()
+print(data)
+
+query="select min(salary) from employee"
+cursor.execute(query)
+data=cursor.fetchall()
+print(data)
+
+query=" SELECT COUNT(*)FROM Employee WHERE department = 'IT'"
+cursor.execute(query)
+data=cursor.fetchall()
+print(data)
+
+query=" select count(*) from employee where department='HR'"
+cursor.execute(query)
+data=cursor.fetchall()
+print(data)
+
+query="select avg(salary) from employee where department='IT'"
+cursor.execute(query)
+data=cursor.fetchall()
+print(data)
+
+query="select max(salary) from employee where department='IT'"
+cursor.execute(query)
+data=cursor.fetchall()
+print(data)
+
+query="select min(salary) from employee where department='IT'"
+cursor.execute(query)
+data=cursor.fetchall()
+print(data)
+
+query =" select count(department) from employee"
+cursor.execute(query)
+data=cursor.fetchall()
+print(data)
+
+query="select avg(salary) from employee"
+cursor.execute(query)
+data=cursor.fetchall()
+print(data)
+print("----------------------------------------------------")
+
+query="select sum (salary),avg(salary), Max(salary), Min(salary) from employee"
+cursor.execute(query)
+data=cursor.fetchall()
+print(data)
+
+query="select count(*),department from employee group by department"
+cursor.execute(query)
+data=cursor.fetchall()
+print(data)
+print("----------------------------------------------------")
+
+query="select sum(salary), department from employee group by department"
+cursor.execute(query)
+data=cursor.fetchall()
+print(data)
+print("----------------------------------------------------")
+
+query="select department, avg(salary) from employee group by department"
+cursor.execute(query)
+data=cursor.fetchall()
+print(data)
+print("----------------------------------------------------")
+
+query="select department, max(salary) as AVG_SALARY from employee group by department"
+cursor.execute(query)
+data=cursor.fetchall()
+print(data)
+print("----------------------------------------------------")
+
+query="select department, min(salary) from employee group by department"
+cursor.execute(query)
+data=cursor.fetchall()
+print(data)
+print("----------------------------------------------------")
+
+query="select count(employee), department, avg(salary) from employee group by department"
+cursor.execute(query)
+data=cursor.fetchall()
+print(data)
+print("----------------------------------------------------")
+
+query="select department,count(salary),max(salary) from employee group by department"
+cursor.execute(query)
+data=cursor.fetchall()
+print(data)
+print("----------------------------------------------------")
+
+query="select department, name from employee group by department, name order by avg(salary) desc"
+cursor.execute(query)
+data=cursor.fetchall()
+print(data)
+print("----------------------------------------------------")
+
+query="select count(*), department from employee  where salary>40000 group by department "
+cursor.execute(query)
+data=cursor.fetchall()
+print(data)
+print("----------------------------------------------------")
+
+query="select department, name, salary from employee where salary>40000 group by department, name, salary"
+cursor.execute(query)
+data=cursor.fetchall()
+print(data)
+print("----------------------------------------------------")
+
+query="select count(*), department from employee group by department"
+cursor.execute(query)
+data=cursor.fetchall()
+print(data)
+print("----------------------------------------------------")
+
+query="select department, count(*) from employee group by department having count(employee)>1"
+cursor.execute(query)
+data=cursor.fetchall()
+print(data)
+print("----------------------------------------------------")
+
+query="select department from employee group by department having count(employee)<2"
+cursor.execute(query)
+data=cursor.fetchall()
+print(data)
+print("----------------------------------------------------")
+
+conn.commit()
+cursor.close()
+conn.close()
